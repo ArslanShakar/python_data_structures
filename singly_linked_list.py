@@ -59,6 +59,46 @@ class SinglyLinkedList:
         self.tail = current
         self.tail.next = None
 
+    def insert_after(self, value, match_value):
+        """
+        Insert value after a specific value
+        """
+        if not self.head:
+            print("No Element found in Linkedlist")
+            return
+
+        new_node = Node(value)
+        current = self.head
+
+        while current:
+            if current.value == match_value:
+                new_node.next = current.next
+                current.next = new_node
+                break
+            current = current.next
+
+    def remove_after(self, value):
+        # It will delete any specific value
+
+        if not self.head:
+            print("No Element found in Linkedlist")
+            return
+
+        if self.head.value == value:
+            self.remove_at_beginning()
+            return
+
+        current = self.head
+        prev = current
+
+        while current.value != value:
+            prev = current
+            current = current.next
+
+        temp = current
+        current = prev
+        current.next = temp.next
+
     def traverse(self):
         print("Traversing Linkedlist Elements:-")
         if not self.head:
@@ -101,4 +141,20 @@ if __name__ == '__main__':
     obj.traverse()
 
     obj.remove_at_end()
+    obj.traverse()
+
+    obj.insert_after('0', '2')
+    obj.insert_after('0', '3')
+    obj.traverse()
+
+    # delete specific value
+    obj.remove_after('0')
+    obj.traverse()
+
+    # delete from last
+    obj.remove_after('0')
+    obj.traverse()
+
+    # delete from first
+    obj.remove_after('1')
     obj.traverse()
